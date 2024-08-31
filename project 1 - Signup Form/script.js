@@ -5,7 +5,8 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 
-//function to udate class and message for errors
+//All Functions
+//function to update class of form control and message for errors
 function showError(input, message) {
     //Get the parent element of the input field i.e form control
     const formControl = input.parentElement;
@@ -17,7 +18,7 @@ function showError(input, message) {
     small.innerText = message;
 }
 
-//function to update class for success
+//function to update class of form control and message for success
 
 function showSuccess(input) {
     //Get the parent element of the input field i.e form control
@@ -26,7 +27,12 @@ function showSuccess(input) {
     formControl.className = 'form-control success';
 }
 
+//Function to check if email is valid
 
+function isValidEmail (email){
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 //Event listeneres are usually added at the end of the page
 //Create event listener for submit button
@@ -44,7 +50,10 @@ form.addEventListener('submit', function (e) {
     //Check if email input is empty
     if (email.value === '') {
         showError(email, 'Email is required');
-    } else {
+    } else if (!isValidEmail(email.value)) {
+        showError(email, 'Email is invalid')
+    }
+     else {
         showSuccess(email);
     }
     //Check if password input is empty
@@ -55,7 +64,7 @@ form.addEventListener('submit', function (e) {
     }
     //Check if password2 input is empty
     if (password2.value === '') {
-        showError(password2, 'Password is required');
+        showError(password2, 'Password2 is required');
     } else {
         showSuccess(password2);
     }
