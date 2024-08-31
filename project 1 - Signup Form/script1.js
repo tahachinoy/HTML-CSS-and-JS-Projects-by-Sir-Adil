@@ -34,33 +34,38 @@ function isValidEmail (email){
     return re.test(String(email).toLowerCase());
 }
 
-//Function to check if required fields have data
-
-function checkRequired(inputArray) {
-    inputArray.forEach(function(input) {
-        if ( input.value === '') {
-            //showError(input, input.id + 'is required'); ye ek tareeqa hai
-            //showError(input, `${input.id} is required`); ye bhi ek tareeqa hai lekin is main username email sab ka first letter capital nahi ho raha, ek teesra tareeqa hai jis ke liye we will create a small function of getfieldid
-            showError(input, `${getFieldId(input)} is required`)
-        } else {
-            showSuccess(input);
-        }
-    })
-
-}
-//Function to get the id of the input field
-
-function getFieldId(input) {
-   //return input.id.toUpperCase(); is se sab uppercase ho jaayein ge humain sab uppercase main nahi karnay
-   return input.id.charAt(0).toUpperCase() + input.id.slice(1); //input id slice 1 se basically hum first letter ko baaki letters se concatenate kar rahay hain 
-}
-
 //Event listeneres are usually added at the end of the page
-//Event listener for the form on submit button
+//Create event listener for submit button
 form.addEventListener('submit', function (e) {
     //Stop page from reloading on submit
     e.preventDefault();
 
-    checkRequired([username, email, password, password2]);
-
+    //Check to see if fields meet required field requirement
+    //Check if username input is empty
+    if (username.value === '') {
+        showError(username, 'Username is required');
+    } else {
+        showSuccess(username);
+    }
+    //Check if email input is empty
+    if (email.value === '') {
+        showError(email, 'Email is required');
+    } else if (!isValidEmail(email.value)) {
+        showError(email, 'Email is invalid')
+    }
+     else {
+        showSuccess(email);
+    }
+    //Check if password input is empty
+    if (password.value === '') {
+        showError(password, 'Password is required');
+    } else {
+        showSuccess(password);
+    }
+    //Check if password2 input is empty
+    if (password2.value === '') {
+        showError(password2, 'Password2 is required');
+    } else {
+        showSuccess(password2);
+    }
 });
