@@ -61,7 +61,7 @@ function updateIncorrectLetters() {
     });
     //Check if user lost
     if (incorrectLettersArray.length === figureParts.length) {
-        finalMessage.innerText = 'You Lost!'
+        finalMessage.innerText = `You Lost! The correct answer was ${selectedWord}`
         popup.style.display = 'flex';
     }
 
@@ -106,7 +106,7 @@ playBtn.addEventListener('click', () => {
     incorrectLettersArray.splice(0);
     //Select a new random word
     selectedWord = words[Math.floor(Math.random() * words.length)];
-    
+
     //Clear incorrect letters display
     updateIncorrectLetters();
     //Hide the popup
