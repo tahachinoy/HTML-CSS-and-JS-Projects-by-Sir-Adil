@@ -64,7 +64,7 @@ h1 button#clear-cards {
 }
 
 .card.left {
-    transform: translateX(50%) rotateY(10deg);
+    transform: translateX(50%) rotateY(-10deg);
 }
 
 .card.right {
